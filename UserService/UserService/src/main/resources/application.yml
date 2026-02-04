@@ -1,0 +1,11 @@
+spring:
+  application:
+    name : UserService
+  datasourse:
+    url: jdbc:postgresql://localhost:5432/TrueForm-user
+    username: postgres
+    password: Bh@rgav2906
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
