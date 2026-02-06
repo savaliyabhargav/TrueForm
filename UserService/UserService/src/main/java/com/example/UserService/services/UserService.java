@@ -3,21 +3,19 @@ package com.example.UserService.services;
 
 import com.example.UserService.UserRepository;
 import com.example.UserService.dto.RegisterRequest;
-import com.example.UserService.dto.UserResponce;
+import com.example.UserService.dto.UserResponse;
 import com.example.UserService.models.User;
 import lombok.AllArgsConstructor;
-import org.jspecify.annotations.Nullable;
-import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class UserServices {
+public class UserService {
 
     private final UserRepository repository;
-    public  UserResponce register(RegisterRequest request) {
+    public UserResponse register(RegisterRequest request) {
         if(repository.existsbyEmail(request.getEmail())){
-
+                throw new RuntimeException("Email already exist");
         }
         User user = new User();
         user.setEmail(request.getEmail());
@@ -26,11 +24,11 @@ public class UserServices {
         user.setPassward(request.getPassword());
 
         User savedUser = new User();
-        UserResponce userResponce = new UserResponce();
+        UserResponse userResponce = new UserResponse();
         userResponce.setId(savedUser.getId());
         userResponce.setPassward(savedUser.getPassward());
         userResponce.setEmail(savedUser.getEmail());
-        UserResponce.getFirstName(savedUser.getFirstName());
+        UserResponse.getFirstName(savedUser.getFirstName());
         userResponce.getLastName(savedUser.getLastName());
         userResponce.getCreatedAt(savedUser.getCreatedAt());
         userResponce.setUpdatedAt(savedUser.getUpdatedAt());
